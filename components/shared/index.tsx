@@ -10,7 +10,7 @@ export { FilterCheckbox } from './filter-checkbox';
 // export { PizzaImage } from './pizza-image';
 // export { ChooseProductForm } from './choose-product-form';
 // export { ChoosePizzaForm } from './choose-pizza-form';
-// export { ProductsGroupList } from './products-group-list';
+export { ProductsGroupList } from './products-group-list';
 // export { GroupVariants } from './group-variants';
 // export { IngredientItem } from './ingredient-item';
 // export { CartButton } from './cart-button';
