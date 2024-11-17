@@ -21,6 +21,7 @@ model User {
   verificationCode VerificationCode?
 
   role UserRole @default(USER)
+  verified DateTime
 
   provider String?
   providerId String?
