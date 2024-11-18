@@ -1,7 +1,7 @@
-export default function ProductPage(){
+export default function ProductPage({params: {id}}){
     return(
         <div>
-            <h1>Product</h1>
+            <h1>Product {id}</h1>
         </div>
     )
 }
