@@ -7,16 +7,17 @@ import {useSet} from "react-use";
 interface ReturnProps {
     ingredients: Ingredient[];
     loading: boolean;
-    selectedIds: Set<string>;
+    selectedIngredients: Set<string>;
     onAddId: (id:string) => void
 }
 
 
-export const useFilterIngredients = ():ReturnProps =>{
+export const useFilterIngredients = (values: string[] = []):ReturnProps =>{
+
     const [ingredients, setIngredients] = React.useState<Ingredient[]>([]);
     const [loading, setLoading] = React.useState(true);
 
-    const [selectedIds, { toggle }] = useSet(new Set<string>([]));
+    const [selectedIngredients, { toggle }] = useSet(new Set<string>(values));
 
 
     React.useEffect(()=>{
@@ -36,6 +37,7 @@ export const useFilterIngredients = ():ReturnProps =>{
 
     }, [])
 
-    return {  ingredients, loading, onAddId : toggle, selectedIds };
+
+    return {  ingredients, loading, onAddId : toggle, selectedIngredients };
 
 }
