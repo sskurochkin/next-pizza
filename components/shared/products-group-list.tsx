@@ -35,11 +35,12 @@ export const ProductsGroupList: React.FC<Props> = ({title, items, categoryId, cl
             <div className="grid grid-cols-3 gap-[50px]">
                 {items.map((item, i) => (
                     <ProductCard
-                        key={i}
-                        name="Маргарита"
-                        imageUrl="https://media.dodostatic.net/image/r:292x292/11EE7D610BBEB562BD4D48786AD87270.webp"
-                        price={390}
-                        count={i % 2}
+                        key={item.id}
+                        name={item.name}
+                        id={item.id}
+                        imageUrl={item.imageUrl}
+                        price={item.items[0].price}
+                        ingredients={item.ingredients}
                     />
                 ))}
             </div>

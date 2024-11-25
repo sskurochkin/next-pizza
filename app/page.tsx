@@ -1,18 +1,30 @@
-import Image from "next/image";
-import {Button} from "@/components/ui/button";
+
 import {Container, Filters, ProductsGroupList, Title, TopBar,} from "@/components/shared";
-import {ProductCard} from "@/components/shared/product-card";
+import {prisma} from "@/prisma/prisma-client";
 
 
 
 
-export default function Home() {
+
+export default async function Home() {
+
+    const categories = await prisma.category.findMany({
+        include:{
+            products:{
+                include:{
+                    ingredients: true,
+                    items: true
+                }
+            }
+        }
+    })
+
   return (
       <>
           <Container className="mt-10">
               <Title text="Все пиццы" size="lg" className="font-extrabold"/>
           </Container>
-          <TopBar/>
+          <TopBar categories={categories}/>
           <Container className="pb-14 mt-14">
               <div className="flex gap-[60px]">
                   <div className="w-[250px]">
@@ -20,9 +32,17 @@ export default function Home() {
                   </div>
                   <div className="flex-1">
                       <div className="flex flex-col gap-16">
-                          <ProductsGroupList title="Пиццы" categoryId={0} items={[1, 2, 3, 4, 5]} />
-                          <ProductsGroupList title="Комбо" categoryId={1} items={[1, 2, 3, 4, 5]} />
+                          {categories.map(x=>(
+                              x.products.length && (
+                                  <ProductsGroupList
+                                      key={x.id}
+                                      title={x.name}
+                                      categoryId={x.id}
+                                      items={x.products} />
+                              )
+                          ))}
                       </div>
+
 
                       <div className="flex items-center gap-6 mt-12">
                           {/*<Pagination pageCount={3} />*/}
